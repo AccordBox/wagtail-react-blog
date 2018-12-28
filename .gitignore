@@ -1,0 +1,12 @@
+/wagtail_react_blog/static_compiled
+
+*.pyc
+.DS_Store
+*.swp
+node_modules/
+/npm-debug.log
+/.idea/
+/.python-version/
+
+deploy/
+fabfile.py
