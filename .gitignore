@@ -6,7 +6,7 @@
 node_modules/
 /npm-debug.log
 /.idea/
-/.python-version/
+/.python-version
 
 deploy/
 fabfile.py
