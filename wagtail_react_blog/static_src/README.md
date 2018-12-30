@@ -1,4 +1,4 @@
-j Front end tooling
+# Front end tooling
 
 This set of tooling should form the basis for any new wagtail projects. It can also be used for custom django builds - simply copy the `static_src` directory from here to your build.
 
@@ -85,18 +85,17 @@ You can remove this section from the readme file for new builds.
 
 To run the tooling inside the `wagtail-kit` build, ensure that you run `npm install` from insdie the built image, i.e. `wagtail-kit/built_image/ck_repo_name/ck_repo_name/static_src`
 
-The easiest way to install new packages is to run `npm install --save-dev package_name` in `wagtail-kit/built_image/ck_repo_name/ck_repo_name/static_src`, but then copy the resultant changes to `package.json` over to `/wagtail-kit/jisc/jisc/static_src`.
+The easiest way to install new packages is to run `npm install --save-dev package_name` in `wagtail-kit/built_image/ck_repo_name/ck_repo_name/static_src`, but then copy the resultant changes to `package.json` over to `/wagtail-kit/{{cookiecutter.repo_name}}/{{cookiecutter.repo_name}}/static_src`.
 
-Changes to the config files can be made directly in `/wagtail-kit/jisc/jisc/static_src` If you make updates to either the config files or package.json ensure you update both the default versions and the react verisons.
+Changes to the config files can be made directly in `/wagtail-kit/{{cookiecutter.repo_name}}/{{cookiecutter.repo_name}}/static_src` If you make updates to either the config files or package.json ensure you update both the default versions and the react verisons.
 
 ## Further details of the packages included
 - **autoprefixer** - adds vendor prefixes as necessary for the browsers defined in `browserslist` in the npm config https://www.npmjs.com/package/autoprefixer
 - **babel-core** - transpiler for es6 / react https://www.npmjs.com/package/babel-core
 - **babel-eslint** - add-on for extra linting of experimental features (may not be necessary for all projects) https://www.npmjs.com/package/babel-eslint
 - **babel-loader** - use babel with webpack - https://www.npmjs.com/package/babel-loader
-- **babel-preset-env** - babel preset for the latest version of es6, es2015
-  etc. https://www.npmjs.com/package/babel-preset-env https://babeljs.io/env/
-https://babeljs.io/docs/plugins/
+- **babel-plugin-external-helpers** - handles helper functions nicely for multiple files (may not be necessary for all projects) https://www.npmjs.com/package/babel-plugin-external-helpers, https://babeljs.io/docs/plugins/external-helpers/
+- **babel-preset-env** - babel preset for the latest version of es6, es2015 etc. https://www.npmjs.com/package/babel-preset-env https://babeljs.io/env/ https://babeljs.io/docs/plugins/
 - **browser-sync** - for automatic reloading of your browser when changes are made to CSS / JS files https://www.npmjs.com/package/browser-sync
 - **eslint** - lint your javascript https://www.npmjs.com/package/eslint
 - **node-sass** - compiles Sass to CSS https://www.npmjs.com/package/node-sass
