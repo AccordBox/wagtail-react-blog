@@ -22,10 +22,10 @@ RUN apt-get update -y && \
 # Install Gunicorn.
 RUN pip install "gunicorn>=19.8,<19.9"
 
-WORKDIR sweat/static_src
+WORKDIR wagtail_react_blog/static_src
 
 # Install front-end dependencies.
-COPY ./sweat/static_src/package.json ./sweat/static_src/package-lock.json ./
+COPY ./wagtail_react_blog/static_src/package.json ./wagtail_react_blog/static_src/package-lock.json ./
 RUN npm install
 
 # Install Python requirements.
@@ -33,7 +33,7 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 # Compile static files
-COPY ./sweat/static_src/ ./
+COPY ./wagtail_react_blog/static_src/ ./
 RUN npm run build:prod
 
 WORKDIR /app
