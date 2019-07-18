@@ -1,4 +1,5 @@
 /wagtail_react_blog/static_compiled
+/static_root/
 
 *.pyc
 .DS_Store
