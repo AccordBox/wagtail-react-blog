@@ -68,7 +68,7 @@
     "watch:css:debug": "onchange $npm_package_config_dest_css -- npm-run-all -p autoprefixer",
     "watch": "npm-run-all -p watch:*",
     "//[ Syncs ]//": "",
-    "sync:font": "rsync -rtvu --delete $npm_package_config_src_font/ $npm_package_config_dest_font/",
+    "// sync:font": "rsync -rtvu --delete $npm_package_config_src_font/ $npm_package_config_dest_font/",
     "sync:img": "rsync -rtvu --delete $npm_package_config_src_img/ $npm_package_config_dest_img/",
     "sync:vendor": "rsync -rtvu --delete $npm_package_config_src_vendor/ $npm_package_config_dest_vendor/",
     "sync": "npm-run-all -p sync:*",

@@ -10,6 +10,8 @@ django-widget-tweaks==1.4.2
 isort==4.3.4
 flake8==3.5.0
 pycodestyle==2.3.0
+django-environ==0.4.5
+
 
 # front-end
 
