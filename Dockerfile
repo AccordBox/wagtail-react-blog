@@ -3,9 +3,10 @@ FROM python:3.6-stretch
 
 WORKDIR /app
 
+# use config.settings.dev so we can serve media files without using AWS s3
 ENV PYTHONUNBUFFERED=1 \
     PYTHONPATH=/app \
-    DJANGO_SETTINGS_MODULE=config.settings.production \
+    DJANGO_SETTINGS_MODULE=config.settings.dev \
     PORT=8000 \
     WEB_CONCURRENCY=3 \
     GUNICORN_CMD_ARGS="--max-requests 1200 --access-logfile -"
