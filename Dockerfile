@@ -42,7 +42,7 @@ WORKDIR /app
 COPY . .
 
 # Install assets
-RUN SECRET_KEY=none django-admin collectstatic --noinput --clear
+RUN python manage.py collectstatic --noinput --clear
 
 # Run application
 CMD ["sh", "config/docker_start.sh"]
