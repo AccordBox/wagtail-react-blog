@@ -12,9 +12,9 @@ This project is a blog application built with React, Bootstrap and Wagtail Rest 
 
 ## Live Demo
 
-[Demo link](http://wagtail-react-blog.accordbox.com/)
+The live demo is deployed on Heroku [Demo link](http://wagtail-react-blog.accordbox.com/)
 
-The admin page of this live demo is on Heroku [blog admin](http://wagtail-react-blog.accordbox.com/admin/) , you can use `admin:admin` to login and publish articles as you like.
+The admin page of this live demo is on [blog admin](http://wagtail-react-blog.accordbox.com/admin/) , you can use `admin:admin` to login and publish articles as you like.
 
 **The database and media files would be reset after a while, so do not be surprised if your article is gone.**
 
