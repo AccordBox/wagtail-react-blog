@@ -104,7 +104,7 @@
     "node": ">=8"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "bootstrap": "^4.2.1",
     "popper.js": "^1.14.6",
     "query-string": "^6.2.0",
