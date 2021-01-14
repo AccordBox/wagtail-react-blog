@@ -1,0 +1,42 @@
+version: '3.7'
+
+services:
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./compose/production/nginx/Dockerfile
+    volumes:
+      - staticfiles:/app/static
+      - mediafiles:/app/media
+    ports:
+      - 80:80
+    depends_on:
+      - web
+
+  web:
+    build:
+      context: .
+      dockerfile: ./compose/production/django/Dockerfile
+    command: /start
+    volumes:
+      - staticfiles:/app/static
+      - mediafiles:/app/media
+    env_file:
+      - ./.env/.prod-sample
+    depends_on:
+      - db
+
+  db:
+    image: postgres:12.0-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=react_wagtail_dev
+      - POSTGRES_USER=react_wagtail
+      - POSTGRES_PASSWORD=react_wagtail
+
+volumes:
+  postgres_data:
+  staticfiles:
+  mediafiles:
