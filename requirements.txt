@@ -1,18 +1,12 @@
-wagtail==2.0
-Django==2.0
-django-taggit==0.22.2
-django-el-pagination==3.1.0
-django-filter==1.1.0
-Markdown==2.6.2
-Pygments
-wagtailmenus==2.8
-django-widget-tweaks==1.4.2
-isort==4.3.4
-flake8==3.5.0
-pycodestyle==2.3.0
+django==3.1
+wagtail==2.10.2
+wagtail-headless-preview==0.1.4
+psycopg2-binary
+djangorestframework
 
-django-environ==0.4.5
-whitenoise==3.3.1
+factory-boy==2.12.0 
+wagtail-factories==2.0.0
+coverage
 
-# front-end
-
+gunicorn
+django-cors-headers
