@@ -1,4 +1,4 @@
-django==3.1
+django==3.1.12
 wagtail==2.10.2
 wagtail-headless-preview==0.1.4
 psycopg2-binary
