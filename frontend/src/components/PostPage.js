@@ -8,7 +8,7 @@ import { PostDetail } from "./PostDetail";
 class PostPage extends React.Component {
   render() {
     return (
-      <div>ssssssssssssssssssssssssssssss
+      <div>ssssssssssssssssssssssssssssssssssssssssss
         <TopNav/>
         <Container>
           <Row>
