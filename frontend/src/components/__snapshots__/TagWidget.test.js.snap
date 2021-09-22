@@ -1,47 +1,51 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`render Tag widget 1`] = `
+exports[`TagWidget Test 1`] = `
 <DocumentFragment>
   <div
-    class="card my-4"
+    class="mb-4 border rounded-lg border-opacity-75 border-gray-300 shadow-xl overflow-hidden dark:border-gray-500"
   >
-    <h5
-      class="card-header"
-    >
-      Tags
-    </h5>
     <div
-      class="card-body"
+      class="bg-gray-100 text-gray-900 px-6 py-4 dark:bg-gray-700 dark:text-gray-400"
+    >
+      <h4
+        class="text-base font-medium"
+      >
+        Tags
+      </h4>
+    </div>
+    <div
+      class="px-6 py-4"
     >
       <a
-        href="/tag/wagtail"
+        class="text-gray-600 hover:text-gray-800"
+        href="/tag/django/"
       >
         <span
-          class="badge badge-secondary"
-        >
-          Wagtail
-        </span>
-         
-      </a>
-      <a
-        href="/tag/django"
-      >
-        <span
-          class="badge badge-secondary"
+          class="inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none text-white bg-gray-600 hover:bg-gray-500 focus:bg-gray-700 rounded-full"
         >
           Django
         </span>
-         
       </a>
       <a
-        href="/tag/react"
+        class="text-gray-600 hover:text-gray-800"
+        href="/tag/wagtail/"
       >
         <span
-          class="badge badge-secondary"
+          class="inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none text-white bg-gray-600 hover:bg-gray-500 focus:bg-gray-700 rounded-full"
+        >
+          Wagtail
+        </span>
+      </a>
+      <a
+        class="text-gray-600 hover:text-gray-800"
+        href="/tag/react/"
+      >
+        <span
+          class="inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none text-white bg-gray-600 hover:bg-gray-500 focus:bg-gray-700 rounded-full"
         >
           React
         </span>
-         
       </a>
     </div>
   </div>

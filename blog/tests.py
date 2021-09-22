@@ -1,7 +1,9 @@
 import json
+import tempfile
 from django.test import TestCase
-import factory
+from django.test import override_settings
 from wagtail.core.models import Site
+import factory
 from wagtail_factories.factories import ImageFactory
 
 from blog.factories import (
@@ -13,11 +15,11 @@ from blog.factories import (
     TagFactory,
 )
 
+from blog.serializers import PostPageSerializer, CategorySerializer, TagSerializer
 
-class TestView(TestCase):
-    """
-    Test blog.views
-    """
+
+@override_settings(MEDIA_ROOT=tempfile.gettempdir())
+class TestSerializer(TestCase):
     def setUp(self):
         self.blog_page = BlogPageFactory.create()
 
@@ -25,96 +27,28 @@ class TestView(TestCase):
         self.site.root_page = self.blog_page
         self.site.save()
 
-    def test_category_view(self):
+    def test_category_serializer(self):
         # arrange
         category_1 = BlogCategoryFactory.create()
 
         # act
-        response = self.client.get("/api/blog/categories/")
-        response_data = response.json()
+        data = CategorySerializer(category_1).data
 
         # assert
-        assert response_data["results"][0]["name"] == category_1.name
-        assert response_data["results"][0]["slug"] == category_1.slug
+        assert data["id"] == category_1.pk
+        assert data["name"] == category_1.name
+        assert data["slug"] == category_1.slug
 
-        # arrange
-        BlogCategoryFactory.create()
-
-        # act
-        response = self.client.get("/api/blog/categories/")
-        response_data = response.json()
-
-        # assert
-        assert len(response_data["results"]) == 2
-
-    def test_tag_view(self):
+    def test_tag_serializer(self):
         tag_1 = TagFactory.create()
 
-        response = self.client.get("/api/blog/tags/")
-        response_data = response.json()
+        data = TagSerializer(tag_1).data
 
-        assert response_data["results"][0]["name"] == tag_1.name
-        assert response_data["results"][0]["slug"] == tag_1.slug
+        assert data["id"] == tag_1.pk
+        assert data["name"] == tag_1.name
+        assert data["slug"] == tag_1.slug
 
-        TagFactory.create()
-        response = self.client.get("/api/blog/tags/")
-        response_data = response.json()
-        assert len(response_data["results"]) == 2
-
-    def test_post_page_view(self):
-        post_page = PostPageFactory.create(parent=self.blog_page,)
-
-        category_1 = BlogCategoryFactory.create()
-        PostPageBlogCategoryFactory.create(
-            page=post_page, blog_category=category_1,
-        )
-
-        tag_1 = TagFactory.create()
-        PostPageTagFactory.create(
-            content_object=post_page, tag=tag_1,
-        )
-
-        response = self.client.get(
-            f"/api/blog/posts/?category={category_1.slug}&tag=*"
-        )
-        response_data = response.json()
-        assert response_data["results"][0]["id"] == post_page.pk
-
-        response = self.client.get(
-            f"/api/blog/posts/?category=*&tag={tag_1.slug}"
-        )
-        response_data = response.json()
-        assert response_data["results"][0]["id"] == post_page.pk
-
-        response = self.client.get("/api/blog/posts/")
-        response_data = response.json()
-        assert response_data["results"][0]["id"] == post_page.pk
-
-        # empty list
-        tag_2 = TagFactory.create()
-        response = self.client.get(
-            f"/api/blog/posts/?category=*&tag={tag_2.slug}"
-        )
-        response_data = response.json()
-        assert response_data["count"] == 0
-
-        category_2 = BlogCategoryFactory.create()
-        response = self.client.get(
-            f"/api/blog/posts/?category={category_2.slug}&tag=*"
-        )
-        response_data = response.json()
-        assert response_data["count"] == 0
-
-
-class TestPostPageAPI(TestCase):
-    def setUp(self):
-        self.blog_page = BlogPageFactory.create()
-
-        self.site = Site.objects.all().first()
-        self.site.root_page = self.blog_page
-        self.site.save()
-
-    def test_post_page(self):
+    def test_post_page_body(self):
         img_1 = ImageFactory(file=factory.django.ImageField(width=1000, height=1000))
         img_2 = ImageFactory(file=factory.django.ImageField(width=1000, height=1000))
         img_3 = ImageFactory(file=factory.django.ImageField(width=1000, height=1000))
@@ -162,38 +96,35 @@ class TestPostPageAPI(TestCase):
             parent=self.blog_page, body=json.dumps(body_data), header_image=img_3
         )
 
-        response = self.client.get(f"/api/cms/pages/{post_page.pk}/")
-        response_data = response.json()
+        data = PostPageSerializer(post_page).data
 
         # return the correct block value
-        assert response_data["body"][1]["value"] == body_data[1]["value"]
+        assert data["body"][1]["value"] == body_data[1]["value"]
 
         # check get_api_representation
-        assert response_data["body"][3]["type"] == "image_text"
-        assert response_data["body"][3]['value']['image']['width'] == 800
+        assert data["body"][3]["type"] == "image_text"
+        assert data["body"][3]['value']['image']['width'] == 800
 
     def test_post_page_category(self):
-        post_page = PostPageFactory.create(parent=self.blog_page,)
+        post_page = PostPageFactory.create(parent=self.blog_page, )
 
         category_1 = BlogCategoryFactory.create()
         PostPageBlogCategoryFactory.create(
             page=post_page, blog_category=category_1,
         )
 
-        response = self.client.get(f"/api/cms/pages/{post_page.pk}/")
-        response_data = response.json()
+        data = PostPageSerializer(post_page).data
 
-        assert response_data["api_categories"][0]["name"] == category_1.name
-        assert response_data["api_categories"][0]["slug"] == category_1.slug
+        assert data["categories"][0]["name"] == category_1.name
+        assert data["categories"][0]["slug"] == category_1.slug
 
         category_2 = BlogCategoryFactory.create()
         PostPageBlogCategoryFactory.create(
             page=post_page, blog_category=category_2,
         )
 
-        response = self.client.get(f"/api/cms/pages/{post_page.pk}/")
-        response_data = response.json()
-        assert len(response_data["api_categories"]) == 2
+        data = PostPageSerializer(post_page).data
+        assert len(data["categories"]) == 2
 
     def test_post_page_tag(self):
         post_page = PostPageFactory.create(parent=self.blog_page,)
@@ -203,16 +134,14 @@ class TestPostPageAPI(TestCase):
             content_object=post_page, tag=tag_1,
         )
 
-        response = self.client.get(f"/api/cms/pages/{post_page.pk}/")
-        response_data = response.json()
+        data = PostPageSerializer(post_page).data
 
-        assert response_data["api_tags"][0]["name"] == tag_1.name
-        assert response_data["api_tags"][0]["slug"] == tag_1.slug
+        assert data["tags"][0]["name"] == tag_1.name
+        assert data["tags"][0]["slug"] == tag_1.slug
 
         tag_2 = TagFactory.create()
         PostPageTagFactory.create(
             content_object=post_page, tag=tag_2,
         )
-        response = self.client.get(f"/api/cms/pages/{post_page.pk}/")
-        response_data = response.json()
-        assert len(response_data["api_tags"]) == 2
+        data = PostPageSerializer(post_page).data
+        assert len(data["tags"]) == 2

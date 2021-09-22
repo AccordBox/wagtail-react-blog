@@ -1,9 +1,9 @@
 from django.utils.text import slugify
 from factory import (
-    DjangoModelFactory,
     LazyAttribute,
     Sequence,
 )
+from factory.django import DjangoModelFactory
 from factory.fuzzy import (
     FuzzyText,
 )

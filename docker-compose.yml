@@ -21,42 +21,10 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_DB=react_wagtail_dev
-      - POSTGRES_USER=react_wagtail
-      - POSTGRES_PASSWORD=react_wagtail
-
-  frontend:
-    build:
-      context: .
-      dockerfile: ./compose/local/node/Dockerfile
-    image: react_wagtail_app_frontend
-    command: yarn start
-    volumes:
-      - .:/app
-      # http://jdlm.info/articles/2016/03/06/lessons-building-node-app-docker.html
-      - /app/frontend/node_modules
-    ports:
-      - 3000:3000
-    depends_on:
-      - web
-    stdin_open: true
-
-  storybook:
-    build:
-      context: .
-      dockerfile: ./compose/local/node/Dockerfile
-    image: react_wagtail_app_storybook
-    command: yarn storybook
-    volumes:
-      - .:/app
-      # http://jdlm.info/articles/2016/03/06/lessons-building-node-app-docker.html
-      - /app/frontend/node_modules
-    ports:
-      - 6006:6006
-    depends_on:
-      - web
-    stdin_open: true
-
+      - POSTGRES_DB=wagtail_dev
+      - POSTGRES_USER=wagtail_dev
+      - POSTGRES_PASSWORD=wagtail_dev
 
 volumes:
   postgres_data:
+

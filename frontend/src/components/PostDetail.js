@@ -1,68 +1,25 @@
 import React from "react";
-import axios from "axios";
 import { StreamField } from "./StreamField/StreamField";
+import { BaseImage } from "./BaseImage";
+import { CommentList } from "./CommentList";
 
-class PostDetail extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      post: [],
-      loading: true,
-    };
-  }
+function PostDetail(props) {
+  const {pageContent} = props;
 
-  componentDidMount() {
-    const pk = this.props.match.params.id;
+  return (
+    <main role="main" className="w-full sm:w-2/3 md:w-3/4 lg:w-8/12 px-2 mb-4">
+      <div className="prose lg:prose-lg xl:prose-xl dark:prose-dark">
+        <BaseImage img={pageContent.headerImage}/>
+        <h1>{pageContent.title}</h1>
+        <hr/>
+        <div> </div>
+      </div>
 
-    // convert querystring to dict
-    const querystring = this.props.location.search.replace(/^\?/, '');
-    const params = {};
-    querystring.replace(/([^=&]+)=([^&]*)/g, function (m, key, value) {
-      params[decodeURIComponent(key)] = decodeURIComponent(value);
-    });
+      <StreamField value={pageContent.body}/>
 
-    if (params.token) {
-      // preview
-      axios.get(`/api/cms/page_preview/${pk}/${this.props.location.search}`)
-        .then((res) => {
-          const post = res.data;
-          this.setState({
-            post,
-            loading: false
-          });
-        });
-    } else {
-      axios.get(`/api/cms/pages/${pk}/`).then((res) => {
-        const post = res.data;
-        this.setState({
-          post,
-          loading: false
-        });
-      })
-    }
-  }
-
-  render() {
-    if (!this.state.loading) {
-      const post = this.state.post;
-
-      return (
-        <div className="col-md-8">
-          <img
-            src={post.header_image_url.url}
-            className="img-fluid rounded"
-            alt=""
-          />
-          <hr />
-          <h1>{post.title}</h1>
-          <hr />
-          <StreamField value={post.body} />
-        </div>
-      );
-    } else {
-      return <div className="col-md-8">Loading...</div>;
-    }
-  }
+      <CommentList {...props}/>
+    </main>
+  );
 }
 
 export { PostDetail };

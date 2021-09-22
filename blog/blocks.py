@@ -45,5 +45,3 @@ class BodyBlock(StreamBlock):
     image_text = ImageText()
     image_carousel = ListBlock(CustomImageChooserBlock())
     thumbnail_gallery = ListBlock(CustomImageChooserBlock())
-
-

@@ -36,6 +36,7 @@ services:
       - POSTGRES_USER=react_wagtail
       - POSTGRES_PASSWORD=react_wagtail
 
+
 volumes:
   postgres_data:
   staticfiles:

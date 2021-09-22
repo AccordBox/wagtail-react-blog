@@ -1,14 +1,17 @@
 import React from "react";
-import { Col } from "react-bootstrap";
 import { TagWidget } from "./TagWidget";
 import { CategoryWidget } from "./CategoryWidget";
+import { SearchForm } from "./SearchForm";
+import { BookCard } from "./BookCard";
 
 function SideBar(props) {
   return (
-    <Col md={4}>
-      <CategoryWidget/>
-      <TagWidget />
-    </Col>
+    <div className="w-full sm:w-1/3 md:w-1/4 lg:w-4/12 px-2">
+      <SearchForm {...props} />
+      <CategoryWidget {...props} />
+      <TagWidget {...props} />
+      <BookCard/>
+    </div>
   );
 }
 

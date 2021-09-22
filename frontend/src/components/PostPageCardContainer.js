@@ -1,115 +1,101 @@
 import React from "react";
-import axios from "axios";
-import { Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { generatePath } from "react-router";
-import _ from 'lodash';
-
 import { PostPageCard } from "./PostPageCard";
+import { classNames } from "../utils";
+import { useLocation, Link } from "react-router-dom";
 
-class PostPageCardContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      posts: [],
-      pageCount: 0,
-      pageStep: 2,
-    };
-    this.getPosts = this.getPosts.bind(this);
+function getPageItems(props, location) {
+  const { paginator } = props;
+  const { currentPage, numPages } = paginator;
+  let items = [];
+
+  const curPath = location.pathname;
+
+  let prePageUrl, nextPageUrl;
+  if (curPath.match(/\/page-[0-9]+/)) {
+    prePageUrl = curPath.replace(/\/page-[0-9]+/, `/page-${currentPage - 1}`);
+    nextPageUrl = curPath.replace(/\/page-[0-9]+/, `/page-${currentPage + 1}`);
+  } else {
+    prePageUrl = `${curPath}/page-${currentPage - 1}`.replace("//", "/");
+    nextPageUrl = `${curPath}/page-${currentPage + 1}`.replace("//", "/");
   }
 
-  componentDidMount() {
-    this.getPosts();
-  }
+  items.push(
+    <li key={prePageUrl}>
+      <Link
+        to={prePageUrl}
+        className={classNames(
+          currentPage <= 1
+            ? "pointer-events-none text-gray-300"
+            : "text-blue-500 dark:text-white",
+          "inline-block py-2 px-4 bg-white  border border-gray-300 ",
+          "border-r-0 rounded-l-lg hover:bg-blue-500 hover:text-white ",
+          "dark:bg-gray-700 dark:border-gray-500 dark:hover:bg-blue-500 dark:hover:text-white"
+        )}
+      >
+        Prev
+      </Link>
+    </li>
+  );
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.location !== this.props.location) {
-      this.getPosts();
-    }
-  }
+  items.push(
+    <li key={nextPageUrl}>
+      <Link
+        to={nextPageUrl}
+        className={classNames(
+          currentPage >= numPages
+            ? "pointer-events-none text-gray-300"
+            : "text-blue-500 dark:text-white ",
+          "inline-block py-2 px-4 bg-white  border border-gray-300 ",
+          "rounded-r-lg hover:bg-blue-500 hover:text-white ",
+          "dark:bg-gray-700 dark:border-gray-500 dark:hover:bg-blue-500 dark:hover:text-white"
+        )}
+      >
+        Next
+      </Link>
+    </li>
+  );
 
-  getCurPage() {
-    // return the page number from the url
-    const page = this.props.match.params.page;
-    return page === undefined ? 1 : parseInt(page);
-  }
+  return items;
+}
 
-  getPrePageUrl() {
-    const target = _.clone(this.props.match.params);
-    target.page = this.getCurPage() - 1;
-    return generatePath(this.props.match.path, target);
-  }
+function getFilterMsg(props) {
+  const { filterMeta } = props;
 
-  getNextPageUrl() {
-    const target = _.clone(this.props.match.params);
-    target.page = this.getCurPage() + 1;
-    return generatePath(this.props.match.path, target);
-  }
-
-  getPosts() {
-    let category =
-      this.props.match.params.category === undefined
-        ? "*"
-        : this.props.match.params.category;
-    let tag =
-      this.props.match.params.tag === undefined
-        ? "*"
-        : this.props.match.params.tag;
-
-    let offset = (this.getCurPage() - 1) * this.state.pageStep;
-    const url = `/api/blog/posts/?limit=${this.state.pageStep}&offset=${offset}&category=${category}&tag=${tag}`;
-    axios.get(
-      url
-    ).then((res) => {
-      const posts = res.data.results;
-      this.setState({
-        posts,
-        pageCount: Math.ceil(parseInt(res.data.count) / this.state.pageStep),
-      });
-    });
-  }
-
-  render() {
-    return (
-      <Col md={8}>
-        {this.state.posts.map((post) => (
-          <PostPageCard postPk={post.id} key={post.id} />
-        ))}
-
-        <nav aria-label="Page navigation example">
-          <ul className="pagination">
-            <li
-              className={
-                this.getCurPage() <= 1 ? "page-item disabled" : "page-item"
-              }
-            >
-              <Link
-                to={this.getPrePageUrl()}
-                className="page-link"
-              >
-                Previous
-              </Link>
-            </li>
-            <li
-              className={
-                this.getCurPage() >= this.state.pageCount
-                  ? "page-item disabled"
-                  : "page-item"
-              }
-            >
-              <Link
-                to={this.getNextPageUrl()}
-                className="page-link"
-              >
-                Next
-              </Link>
-            </li>
-          </ul>
-        </nav>
-      </Col>
+  let filterMsg = "";
+  if (filterMeta.filterType) {
+    filterMsg = (
+      <div
+        className="px-4 py-3 leading-normal text-blue-700 bg-blue-100 rounded-lg mb-4"
+        role="alert"
+      >
+        <p>
+          {filterMeta.filterType}: {filterMeta.filterTerm}
+        </p>
+      </div>
     );
-
   }
+  return filterMsg;
+}
+
+function PostPageCardContainer(props) {
+  const { childrenPages } = props;
+  const location = useLocation();
+  const pageItems = getPageItems(props, location);
+  const filterMsg = getFilterMsg(props);
+
+  return (
+    <main role="main" className="w-full sm:w-2/3 md:w-3/4 lg:w-8/12 px-2 mb-4">
+      {filterMsg}
+
+      {childrenPages.map((post) => (
+        <PostPageCard post={post} key={post.pageContent.id} />
+      ))}
+
+      <nav aria-label="Page navigation">
+        <ul className="flex pl-0 rounded list-none flex-wrap">{pageItems}</ul>
+      </nav>
+    </main>
+  );
 }
 
 export { PostPageCardContainer };

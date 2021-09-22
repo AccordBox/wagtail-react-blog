@@ -1,17 +1,20 @@
 import React from "react";
-import { Carousel } from "react-bootstrap";
+import { BaseImage } from "../BaseImage";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
 
 function ImageCarousel(props) {
   return (
-    <div className="my-4">
-      <Carousel>
-        {props.value.map((item, index) => (
-          <Carousel.Item key={`${index}.${item}`}>
-            <img className="d-block w-100" src={item.url} alt="" />
-          </Carousel.Item>
-        ))}
-      </Carousel>
-    </div>
+    <Carousel
+      autoPlay={true}
+      infiniteLoop={true}
+      showStatus={false}
+      showThumbs={false}
+    >
+      {props.value.map((item, index) => (
+        <BaseImage img={item} key={`${index}.${item}`}/>
+      ))}
+    </Carousel>
   );
 }
 

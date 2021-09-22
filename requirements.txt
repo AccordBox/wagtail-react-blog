@@ -1,12 +1,14 @@
-django==3.1
-wagtail==2.10.2
-wagtail-headless-preview==0.1.4
-psycopg2-binary
+django==3.2
+wagtail==2.14.1
+psycopg2-binary==2.8.6
 djangorestframework
+factory-boy==3.2.0
+wagtail-factories==2.0.1
+coverage==5.5
+django-cors-headers==3.7.0
+wagtail-headless-preview==0.1.4
 
-factory-boy==2.12.0 
-wagtail-factories==2.0.0
-coverage
+django-contrib-comments==2.1.0
+emoji==0.6.0
 
-gunicorn
-django-cors-headers
+gunicorn==20.1.0

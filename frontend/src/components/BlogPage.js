@@ -1,25 +1,24 @@
 import React from "react";
-import { Container, Row } from "react-bootstrap";
 import { TopNav } from "./TopNav";
 import { Footer } from "./Footer";
-import { PostPageCardContainer } from "./PostPageCardContainer";
 import { SideBar } from "./SideBar";
+import { PostPageCardContainer } from "./PostPageCardContainer";
 
-class BlogPage extends React.Component {
-  render() {
-    return (
-      <div>
-        <TopNav />
-        <Container>
-          <Row>
-            <PostPageCardContainer {...this.props} />
-            <SideBar />
-          </Row>
-        </Container>
-        <Footer />
+function BlogPage(props) {
+  return (
+    <div className="flex flex-col min-h-screen">
+      <TopNav />
+
+      <div className="w-full max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+        <div className="flex flex-row flex-wrap py-4">
+          <PostPageCardContainer {...props} />
+          <SideBar {...props} />
+        </div>
       </div>
-    );
-  }
+
+      <Footer />
+    </div>
+  );
 }
 
-export { BlogPage };
+export default BlogPage;

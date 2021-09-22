@@ -1,27 +1,19 @@
 import React from "react";
-import { Route, Switch } from "react-router";
-import { Container, Row } from "react-bootstrap";
-import { BlogPage } from "./components/BlogPage";
-import { PostPage } from "./components/PostPage";
+import { Route, Switch, BrowserRouter } from "react-router-dom";
+
+import PageProxy from "./components/PageProxy";
+import SearchPage from "./components/SearchPage";
+import PreviewPage from "./components/PreviewPage";
 
 function App() {
   return (
-    <Switch>
-      <Route path="/post/:id([\d]+)" component={PostPage}/>
-      <Route path="/category/:category/:page([\d]+)?" component={BlogPage}/>
-      <Route path="/tag/:tag/:page([\d]+)?" component={BlogPage}/>
-      <Route path="/:page([\d]+)?" component={BlogPage}/>
-      <Route
-        path="*"
-        component={() => (
-          <Container>
-            <Row>
-              <h1>404</h1>
-            </Row>
-          </Container>
-        )}
-      />
-    </Switch>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/search/" component={SearchPage} />
+        <Route path="/_preview/" component={PreviewPage} />
+        <Route path="*" component={PageProxy}/>
+      </Switch>
+    </BrowserRouter>
   );
 }
 
