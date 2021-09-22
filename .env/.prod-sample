@@ -9,4 +9,4 @@ SQL_PASSWORD=react_wagtail
 SQL_HOST=db
 SQL_PORT=5432
 
-FRONTEND_BASE_URL=http://react-wagtail.accordbox.com
+REACT_APP_BASE=http://react-wagtail.accordbox.com
