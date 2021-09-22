@@ -138,6 +138,7 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
+/.idea
 .DS_Store
 /media
 project.tar
