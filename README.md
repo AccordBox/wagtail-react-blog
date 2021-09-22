@@ -2,6 +2,12 @@
 
 This project is from book [Build SPA with React and Wagtail](https://leanpub.com/react-wagtail)
 
+## Demo
+
+The demo is also online if you want to check.
+
+* [React app Demo](http://react-wagtail.accordbox.com)
+
 ## Objectives
 
 This book will teach you how to build a `SPA` (single-page application) using `React` and `Wagtail CMS`.
@@ -101,10 +107,4 @@ $ yarn start
 Now you can check on
 
 * [http://localhost:3000/](http://localhost:3000/)
-
-## Demo
-
-The demo is also online if you want to check.
-
-* [React app Demo](http://react-wagtail.accordbox.com)
 
