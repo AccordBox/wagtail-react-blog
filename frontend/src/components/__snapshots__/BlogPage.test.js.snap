@@ -1,0 +1,158 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BlogPage Test 1`] = `
+<DocumentFragment>
+  <div
+    class="flex flex-col min-h-screen"
+  >
+    <nav
+      class="bg-white border-b border-opacity-75 border-gray-300 dark:bg-gray-900 dark:text-white dark:border-gray-500"
+    >
+      <div
+        class="w-full max-w-7xl mx-auto px-2 sm:px-6 lg:px-8"
+      >
+        <div
+          class="relative flex items-center justify-between h-16"
+        >
+          <div
+            class="absolute inset-y-0 left-0 flex items-center sm:hidden"
+          >
+            <button
+              aria-expanded="false"
+              class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+              id="headlessui-disclosure-button-1"
+              type="button"
+            >
+              <span
+                class="sr-only"
+              >
+                Open main menu
+              </span>
+              <svg
+                aria-hidden="true"
+                class="block h-6 w-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M4 6h16M4 12h16M4 18h16"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                />
+              </svg>
+            </button>
+          </div>
+          <div
+            class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start"
+          >
+            <div
+              class="flex-shrink-0 flex items-center"
+            >
+              <a
+                href="/"
+              >
+                <span
+                  class="text-bold text-grey-800"
+                >
+                  React Wagtail Demo
+                </span>
+              </a>
+            </div>
+            <div
+              class="hidden sm:block sm:ml-6"
+            >
+              <div
+                class="flex space-x-4"
+              >
+                <a
+                  class="text-gray-500 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  href="#"
+                >
+                  Dashboard
+                </a>
+                <a
+                  class="text-gray-500 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  href="#"
+                >
+                  Team
+                </a>
+                <a
+                  class="text-gray-500 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  href="#"
+                >
+                  Projects
+                </a>
+                <a
+                  class="text-gray-500 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  href="#"
+                >
+                  Calendar
+                </a>
+              </div>
+            </div>
+          </div>
+          <div
+            class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+          >
+            <button
+              class="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="h-6 w-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div
+      class="w-full max-w-7xl mx-auto px-2 sm:px-6 lg:px-8"
+    >
+      <div
+        class="flex flex-row flex-wrap py-4"
+      >
+        <div
+          data-testid="PostPageCardContainer"
+        />
+        <div
+          data-testid="SideBar"
+        />
+      </div>
+    </div>
+    <footer
+      class="mt-auto py-7 bg-white border-t border-opacity-75 border-gray-300 dark:bg-gray-900 dark:text-white dark:border-gray-500"
+    >
+      <div
+        class="container mx-auto"
+      >
+        <p
+          class="m-0 text-center text-blue-700 hover:underline dark:text-gray-400"
+        >
+          Built by 
+          <a
+            href="https://www.accordbox.com/"
+          >
+            michaelyin@accordbox.com
+          </a>
+        </p>
+      </div>
+    </footer>
+  </div>
+</DocumentFragment>
+`;
