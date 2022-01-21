@@ -1,5 +1,5 @@
 django==3.2
-wagtail==2.14.1
+wagtail==2.15.2
 psycopg2-binary==2.8.6
 djangorestframework
 factory-boy==3.2.0
