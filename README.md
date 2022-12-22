@@ -1,6 +1,6 @@
 ## Introduction
 
-This project is from book [Build SPA with React and Wagtail](https://leanpub.com/react-wagtail)
+**This project is archived, please get the latest version of the source code from my book [Build SPA with React and Wagtail](https://leanpub.com/react-wagtail)**
 
 ## Demo
 
